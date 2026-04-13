@@ -25,7 +25,6 @@
     padding: 30px;
     border-radius: 15px;
     width: 400px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   }
 
   h1{
@@ -43,7 +42,7 @@
     padding: 10px;
     border-radius: 15px;
   }
-
+  
   .btn{
     margin-top: 20px;
     background: #ffc107;
@@ -57,34 +56,59 @@
 <div class="box">
   <h1>Heat Index Checker</h1>
 
-  <label>Degree in °C</label>
+  <label for="temp">Degree in °C</label>
   <input type="number" placeholder="Input degree value">
 
-  <label>Humidity in %</label>
-  <input type="number" placeholder="Input percentage value">
+  <label for="humidity">Humidity in %</label>
+  <input type ="number" id="temp" class="form-control" placeholder="Input percentage value">
 
-  <button type="submit" id="btn_heat" class="btn" onclick="checkHeat()">Check</button>
+  <button type="submit" id="btn_temp btn_humidity" class="btn" onclick="checkHeat()">Check</button>
 </div>
 
 <script>
-    function checkHeat(){
-        var heat = document.getElementById("index").value;
+function checkHeat(){
 
-            switch (true){
+  let temp = parseFloat(document.getElementById("temp").value);
+  let humidity = parseFloat(document.getElementById("humidity").value);
 
-                case (heat <= 24):
-                    alert("It's all yours.");
-                    break;
-                    
-                case (song1 === "Let Down"):
-                    alert("Why was I born short?");
-                    break;
-                    
-                default:
-                    alert("Song Not Available.");
+  if (isNaN(temp) || isNaN(humidity)) {
+    document.getElementById("result").innerHTML = "Please enter valid values!";
+    return;
+  }
 
-            }
-    }
+  let heatIndex = temp + (0.33 * humidity) - 4;
+
+  let status;
+
+  switch(true){
+
+    case (heatIndex <= 27):
+      status = "Comfortable / Cool";
+      break;
+
+    case (heatIndex >= 28 && heatIndex <= 32):
+      status = "Warm";
+      break;
+
+    case (heatIndex >= 33 && heatIndex <= 37):
+      status = "Hot";
+      break;
+
+    case (heatIndex >= 38 && heatIndex <= 41):
+      status = "Very Hot / Caution";
+      break;
+
+    case (heatIndex >= 42):
+      status = "Extreme Heat / Danger";
+      break;
+
+    default:
+      status = "Unknown";
+  }
+
+  document.getElementById("result").innerHTML =
+    "Heat Index: " + heatIndex.toFixed(2) + "°C <br>Status: " + status;
+}
 </script>
 
 </body>
