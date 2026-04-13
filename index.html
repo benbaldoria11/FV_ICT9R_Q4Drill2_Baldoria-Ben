@@ -46,7 +46,7 @@
   .btn{
     margin-top: 20px; /* same for this sir*/
     background: #ffc107;
-    border-radius: 6px; /* sir i made it 6 becausae it fits */
+    border-radius: 6px; /* sir i made it 6 because it fits */
   }
 </style>
 
@@ -68,8 +68,8 @@
 <script>
 function checkHeat(){
 
-  let temp = Number(document.getElementById("temp").value);
-  let humidity = Number(document.getElementById("humidity").value);
+  let temp = Number(document.getElementById("temp").value); // sir i added the word "Number" in the document thingie so that the numbers could add up
+  let humidity = Number(document.getElementById("humidity").value); // same for this sir
   var heatIndex = temp + (0.33 * humidity) - 4;
 
     if(temp <= 0 || humidity <= 0){
@@ -97,7 +97,7 @@ function checkHeat(){
 
     case (heatIndex >= 42):
       alert(heatIndex + "°C" + ", Extreme Heat/Danger");
-      break;
+      break; // btw sir i submitted at 2:57 im just adding comments at 3 pm
   }
   }
 
